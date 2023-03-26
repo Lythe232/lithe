@@ -1,0 +1,1 @@
+/usr/bin/c++   -rdynamic -O0 -ggdb -std=c++11 -Wall -Wno-deprecated -Wno-unused-function   CMakeFiles/main.dir/main.cpp.o  -o ../bin/main  -Wl,-rpath,/home/lythe/Codes/lithe/lib ../lib/liblithe.so 

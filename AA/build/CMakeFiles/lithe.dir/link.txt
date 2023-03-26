@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC  -rdynamic -O0 -ggdb -std=c++11 -Wall -Wno-deprecated -Wno-unused-function  -shared -Wl,-soname,liblithe.so -o ../lib/liblithe.so CMakeFiles/lithe.dir/fileUtils.cpp.o CMakeFiles/lithe.dir/logStream.cpp.o CMakeFiles/lithe.dir/log.cpp.o 
