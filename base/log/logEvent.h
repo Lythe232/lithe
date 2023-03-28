@@ -2,6 +2,7 @@
 
 //#include <sstream>
 #include "logStream.h"
+#include "common/timestamp.h"
 namespace lithe
 {
 
@@ -9,7 +10,7 @@ class LogEvent
 {
 public:
     LogEvent(std::shared_ptr<Logger> logger, LogLevel::Level level, const char* filename, uint32_t line, uint32_t elapse, uint32_t threadId, uint32_t fiberId, time_t time, std::string threadName)
-        : filename_(filename), line_(line), elapse_(elapse), threadId_(threadId), fiberId_(fiberId), time_(time), logger_(logger), level_(level), threadName_(threadName)
+        : filename_(filename), line_(line), elapse_(elapse), threadId_(threadId), fiberId_(fiberId), logger_(logger), level_(level), threadName_(threadName)
     {
     }
     const char* getFile() { return filename_; }
@@ -17,7 +18,7 @@ public:
     const uint32_t getElapse() { return elapse_; }
     const uint32_t getThreadId() { return threadId_; }
     const uint32_t getFiberId() { return fiberId_; }
-    const time_t getTime() { return time_; }
+    const time_t getTime() { return stamp_.now().seconds(); }
     std::shared_ptr<Logger> getLogger() { return logger_; }
     LogLevel::Level getLevel() { return level_; }
     std::string getThreadName() { return threadName_; }
@@ -31,7 +32,7 @@ private:
     uint32_t elapse_;
     uint32_t threadId_;
     uint32_t fiberId_;
-    time_t time_;
+    Timestamp stamp_;
     std::shared_ptr<Logger> logger_;
     LogLevel::Level level_;
     std::string threadName_;

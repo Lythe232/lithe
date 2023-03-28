@@ -1,5 +1,5 @@
 #include "logAppender.h"
-
+#include "thread/mutex.h"
 
 #include <string>
 
@@ -19,7 +19,7 @@ FileAppender::FileAppender(std::string basename,
                             flushInterval_(flushInterval), 
                             checkEveryN_(checkEveryN),
                             count_(0),
-                            mutex_(threadSafe ? 1 : 0),
+                            mutex_(threadSafe ? new Mutex() : nullptr),
                             startOfPeriod_(0),
                             lastRoll_(0),
                             lastFlush_(0)
@@ -28,15 +28,25 @@ FileAppender::FileAppender(std::string basename,
 }
 void FileAppender::log(std::shared_ptr<Logger> logger, LogLevel::Level level, std::shared_ptr<LogEvent> event)
 {
-    formatter_->format(stream_, logger, level, event);
+    {
+        if(mutex_)
+        {
+            MutexLockGuard lock(*mutex_);
+            stream_.resetBuffer();
+            formatter_->format(stream_, logger, level, event);
+        }
+        else
+        {
+            formatter_->format(stream_, logger, level, event);
+        }
+    }
     append(stream_.toString().c_str(), stream_.toString().size());
 
-    stream_.resetBuffer();
     //fprintf(stdout, "file_->wirttenBytes() = %ld\trollSize_ = %ld\n", file_->writtenBytes(), rollSize_);
 }
 bool FileAppender::rollFile()
 {
-    time_t now = time(NULL);
+    time_t now = stamp_.now().seconds();
     std::string filename = getLogFileName(basename_, &now);
     //fprintf(stdout, "filename = %s\n", filename.c_str());
     time_t start = now / kRollPerSeconds_ * kRollPerSeconds_;
@@ -83,7 +93,7 @@ void FileAppender::append(const char *logline, size_t len)
 {
     if(mutex_)
     {
-        //MutexLockGuard lock(mutex_);
+        MutexLockGuard lock(*mutex_);
         append_unlocked(logline, len);
     }
     else
@@ -95,7 +105,7 @@ void FileAppender::flush()
 {
     if(mutex_)
     {
-        // MutexGuardLock mutex(mutex_);
+        MutexLockGuard lock(*mutex_);
         file_->flush();
     }
     else
@@ -103,9 +113,17 @@ void FileAppender::flush()
         file_->flush();
     }
 }
+StdoutAppender::StdoutAppender()
+{
+    mutex_.reset(new Mutex());
+}
 void StdoutAppender::log(std::shared_ptr<Logger> logger, LogLevel::Level level, std::shared_ptr<LogEvent> event)
 {
-    formatter_->format(stream_, logger, level, event);
+    {
+        MutexLockGuard lock(*mutex_);
+        formatter_->format(stream_, logger, level, event);
+    }
+    
     fprintf(stdout, stream_.toString().c_str());
 }
 

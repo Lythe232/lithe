@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/lythe/Codes/lithe/base/common/fileUtils.cpp
+fileUtils.h
+/home/lythe/Codes/lithe/base/common/fileUtils.h
+assert.h
+-
+error.h
+-
+string.h
+-
+
+/home/lythe/Codes/lithe/base/common/fileUtils.h
+string
+-
+

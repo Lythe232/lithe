@@ -7,13 +7,20 @@ namespace lithe
 Logger::Logger(std::string name) : name_(name)
 {
     level_ = LogLevel::DEBUG;
-    formatter_.reset(new LogFormatter("%d{%Y-%m-%d %H:%M:%S}%T%t%T%N%T%F%T[%p]%T[%c]%T%f:%l%T%m%n"));
+    mutex_.reset(new Mutex());
+    formatter_.reset(new LogFormatter());   //TODO
+}
+Logger::~Logger()
+{    
 }
 void Logger::log(LogLevel::Level level, std::shared_ptr<LogEvent> event)
 {
     if(level >= level_)
     {
         auto self = shared_from_this();
+        
+        MutexLockGuard lock(*mutex_);
+
         if(!appenders_.empty())
         {
             for(auto& i : appenders_)
@@ -48,32 +55,33 @@ void Logger::setLevel(LogLevel::Level level)
 {
     level_ = level;
 }
-void Logger::setFormatter(std::shared_ptr<LogFormatter> formatter) {
-    if (!appenders_.empty())
-    {
-        for(auto& it : appenders_)
-        {
-            if(!it->hasFormatter())
-            {
-                it->setFormatter(true);
-                it->setFormatter(formatter);
-            }
-        }
-    }
+// void Logger::setFormatter(std::shared_ptr<LogFormatter> formatter) {
+//     if (!appenders_.empty())
+//     {
+//         for(auto& it : appenders_)
+//         {
+//             if(!it->hasFormatter())
+//             {
+//                 it->setFormatter(true);
+//                 it->setFormatter(formatter);
+//             }
+//         }
+//     }
 
-}
-void Logger::setFormatter(const std::string &val)
-{
-    std::shared_ptr<LogFormatter> formatter(new LogFormatter(val));
-    if(formatter->isError())
-    {
-        //TODO ERROR
-        return ;
-    }
-    setFormatter(formatter);
-}
+// }
+// void Logger::setFormatter(const std::string &val)
+// {
+//     std::shared_ptr<LogFormatter> formatter(new LogFormatter(val));
+//     if(formatter->isError())
+//     {
+//         //TODO ERROR
+//         return ;
+//     }
+//     setFormatter(formatter);
+// }
 void Logger::addAppender(std::shared_ptr<LogAppender> appender)
 {
+    MutexLockGuard lock(*mutex_);
     if(!appender->hasFormatter())
     {
         appender->setFormatter(true);
@@ -85,6 +93,7 @@ void Logger::delAppender(std::shared_ptr<LogAppender> appender)
 {
     if(!appenders_.empty())
     {
+        MutexLockGuard lock(*mutex_);
         for(auto i = appenders_.begin(); i != appenders_.end(); i++)
         {
             if(*i == appender)
@@ -96,14 +105,12 @@ void Logger::delAppender(std::shared_ptr<LogAppender> appender)
 }
 
 
-template<> LoggerManager* Singleton<LoggerManager>::singleton_ = 0;
+template<> LoggerManager* Singleton<LoggerManager, void>::singleton_ = 0;
 LoggerManager::LoggerManager()
 {
     root_.reset(new Logger);
-    root_->addAppender(std::shared_ptr<LogAppender>(new FileAppender("/tmp/logs/", 40960, false, 3, 1024)));
-    
+    root_->addAppender(std::shared_ptr<LogAppender>(new FileAppender("/home/lythe/Codes/lithe/log/log", 40960, true, 3, 1024)));
     loggers_[root_->getName()] = root_;
-
 }
 std::shared_ptr<Logger> LoggerManager::getLogger(std::string& name)
 {

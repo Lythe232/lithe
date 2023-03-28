@@ -1,20 +1,20 @@
 #pragma once
 
-#include "../singleton.h"
+#include "common/singleton.h"
+#include "thread/mutex.h"
 
 #include <string>
 #include <memory>
 #include <list>
 #include <map>
 
-#define LOG_LEVEL(logger, level) LogEventWrap(std::shared_ptr<LogEvent>(new LogEvent(logger, level, __FILE__, __LINE__, 0, 1, 2, time(NULL), "threadName"))).getStream()
+#define LOG_LEVEL(logger, level) LogEventWrap(std::shared_ptr<LogEvent>(new LogEvent(logger, level, __FILE__, __LINE__, 0, 1, 2, 0, "threadName"))).getStream()
 #define LOG_DEBUG(logger) LOG_LEVEL(logger, LogLevel::DEBUG)
 #define LOG_INFO(logger) LOG_LEVEL(logger, LogLevel::INFO)
 #define LOG_WARN(logger) LOG_LEVEL(logger, LogLevel::WARN)
 #define LOG_ERROR(logger) LOG_LEVEL(logger, LogLevel::ERROR)
 #define LOG_FATAL(logger) LOG_LEVEL(logger, LogLevel::FATAL)
 
-#define LOG_ROOT() 
 namespace lithe
 {
 
@@ -71,6 +71,8 @@ class Logger : public std::enable_shared_from_this<Logger>
 {
 public:
     explicit Logger(std::string name = "root");
+    ~Logger();
+
     void log(LogLevel::Level level, std::shared_ptr<LogEvent> event);
     void debug(std::shared_ptr<LogEvent> event);
     void info(std::shared_ptr<LogEvent> event);
@@ -92,9 +94,13 @@ private:
     std::list<std::shared_ptr<LogAppender>> appenders_;
     std::shared_ptr<LogFormatter> formatter_;
     std::shared_ptr<Logger> root_;
+
+    std::unique_ptr<Mutex> mutex_;
 };
 
-class LoggerManager : public Singleton<LoggerManager>
+
+
+class LoggerManager : public Singleton<LoggerManager, void>
 {
 public:
     LoggerManager();
@@ -107,5 +113,5 @@ private:
     std::shared_ptr<Logger> root_;
 };
 
-typedef LoggerManager LoggerMgr;
+
 }   // namespace lithe

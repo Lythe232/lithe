@@ -3,8 +3,9 @@
 #include "logger.h"
 #include "logStream.h"
 #include "logFormatter.h"
-#include "../fileUtils.h"
-#include "../processInfo.h"
+#include "common/fileUtils.h"
+#include "common/processInfo.h"
+#include "thread/mutex.h"
 
 #include <memory>
 namespace lithe
@@ -45,9 +46,11 @@ private:
     const int flushInterval_;
     const int checkEveryN_;
 
+    Timestamp stamp_;
+
     int count_;
 
-    int mutex_;
+    std::unique_ptr<Mutex> mutex_;
 
     time_t startOfPeriod_;
     time_t lastRoll_;
@@ -56,11 +59,22 @@ private:
 
     const static int kRollPerSeconds_ = 60 * 60 * 24;
 };
+class AsynFileAppender : public LogAppender
+{
+public:
+    AsynFileAppender();
+    ~AsynFileAppender();
+
+private:
+};
+
 class StdoutAppender : public LogAppender
 {
 public:
+    StdoutAppender();
     void log(std::shared_ptr<Logger> logger, LogLevel::Level level, std::shared_ptr<LogEvent> event) override;
 private:
+    std::unique_ptr<Mutex> mutex_;
 };
 
 }   //lithe

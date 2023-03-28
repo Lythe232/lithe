@@ -1,0 +1,4 @@
+/home/lythe/Codes/lithe/base/build/CMakeFiles/rebuild_cache.dir
+/home/lythe/Codes/lithe/base/build/CMakeFiles/edit_cache.dir
+/home/lythe/Codes/lithe/base/build/CMakeFiles/main.dir
+/home/lythe/Codes/lithe/base/build/CMakeFiles/lithe.dir

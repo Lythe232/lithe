@@ -1,2 +1,0 @@
-/usr/bin/ar qc ../lib/liblithe.a  CMakeFiles/lithe.dir/logStream.cpp.o CMakeFiles/lithe.dir/home/lythe/Codes/lithe/base/fileUtils.cpp.o CMakeFiles/lithe.dir/home/lythe/Codes/lithe/base/processInfo.cpp.o CMakeFiles/lithe.dir/logAppender.cpp.o CMakeFiles/lithe.dir/logFormatter.cpp.o CMakeFiles/lithe.dir/logEvent.cpp.o CMakeFiles/lithe.dir/logger.cpp.o
-/usr/bin/ranlib ../lib/liblithe.a
