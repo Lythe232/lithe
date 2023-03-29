@@ -34,12 +34,20 @@ public:
 
     void setCookie(void (*cookie)()) { cookie_ = cookie; }
 
-    void reset() { cur_ = data_; }
+    void reset() 
+    { 
+        bzero();
+        cur_ = data_; 
+    }
     
     char* current() { return cur_; }
 
     std::string toString() { return std::string(data_, length());}
 
+    void bzero()
+    {
+        memset(data_, 0, sizeof data_);
+    }
 private:
     char* end() { return data_ + sizeof(data_); }
 

@@ -139,6 +139,33 @@ lithe/fast:
 	$(MAKE) -f CMakeFiles/lithe.dir/build.make CMakeFiles/lithe.dir/build
 .PHONY : lithe/fast
 
+common/countDownLatch.o: common/countDownLatch.cpp.o
+
+.PHONY : common/countDownLatch.o
+
+# target to build an object file
+common/countDownLatch.cpp.o:
+	$(MAKE) -f CMakeFiles/lithe.dir/build.make CMakeFiles/lithe.dir/common/countDownLatch.cpp.o
+.PHONY : common/countDownLatch.cpp.o
+
+common/countDownLatch.i: common/countDownLatch.cpp.i
+
+.PHONY : common/countDownLatch.i
+
+# target to preprocess a source file
+common/countDownLatch.cpp.i:
+	$(MAKE) -f CMakeFiles/lithe.dir/build.make CMakeFiles/lithe.dir/common/countDownLatch.cpp.i
+.PHONY : common/countDownLatch.cpp.i
+
+common/countDownLatch.s: common/countDownLatch.cpp.s
+
+.PHONY : common/countDownLatch.s
+
+# target to generate assembly for a file
+common/countDownLatch.cpp.s:
+	$(MAKE) -f CMakeFiles/lithe.dir/build.make CMakeFiles/lithe.dir/common/countDownLatch.cpp.s
+.PHONY : common/countDownLatch.cpp.s
+
 common/fileUtils.o: common/fileUtils.cpp.o
 
 .PHONY : common/fileUtils.o
@@ -220,6 +247,33 @@ common/timestamp.cpp.s:
 	$(MAKE) -f CMakeFiles/lithe.dir/build.make CMakeFiles/lithe.dir/common/timestamp.cpp.s
 .PHONY : common/timestamp.cpp.s
 
+log/AsyncLogging.o: log/AsyncLogging.cpp.o
+
+.PHONY : log/AsyncLogging.o
+
+# target to build an object file
+log/AsyncLogging.cpp.o:
+	$(MAKE) -f CMakeFiles/lithe.dir/build.make CMakeFiles/lithe.dir/log/AsyncLogging.cpp.o
+.PHONY : log/AsyncLogging.cpp.o
+
+log/AsyncLogging.i: log/AsyncLogging.cpp.i
+
+.PHONY : log/AsyncLogging.i
+
+# target to preprocess a source file
+log/AsyncLogging.cpp.i:
+	$(MAKE) -f CMakeFiles/lithe.dir/build.make CMakeFiles/lithe.dir/log/AsyncLogging.cpp.i
+.PHONY : log/AsyncLogging.cpp.i
+
+log/AsyncLogging.s: log/AsyncLogging.cpp.s
+
+.PHONY : log/AsyncLogging.s
+
+# target to generate assembly for a file
+log/AsyncLogging.cpp.s:
+	$(MAKE) -f CMakeFiles/lithe.dir/build.make CMakeFiles/lithe.dir/log/AsyncLogging.cpp.s
+.PHONY : log/AsyncLogging.cpp.s
+
 log/logAppender.o: log/logAppender.cpp.o
 
 .PHONY : log/logAppender.o
@@ -246,6 +300,33 @@ log/logAppender.s: log/logAppender.cpp.s
 log/logAppender.cpp.s:
 	$(MAKE) -f CMakeFiles/lithe.dir/build.make CMakeFiles/lithe.dir/log/logAppender.cpp.s
 .PHONY : log/logAppender.cpp.s
+
+log/logFile.o: log/logFile.cpp.o
+
+.PHONY : log/logFile.o
+
+# target to build an object file
+log/logFile.cpp.o:
+	$(MAKE) -f CMakeFiles/lithe.dir/build.make CMakeFiles/lithe.dir/log/logFile.cpp.o
+.PHONY : log/logFile.cpp.o
+
+log/logFile.i: log/logFile.cpp.i
+
+.PHONY : log/logFile.i
+
+# target to preprocess a source file
+log/logFile.cpp.i:
+	$(MAKE) -f CMakeFiles/lithe.dir/build.make CMakeFiles/lithe.dir/log/logFile.cpp.i
+.PHONY : log/logFile.cpp.i
+
+log/logFile.s: log/logFile.cpp.s
+
+.PHONY : log/logFile.s
+
+# target to generate assembly for a file
+log/logFile.cpp.s:
+	$(MAKE) -f CMakeFiles/lithe.dir/build.make CMakeFiles/lithe.dir/log/logFile.cpp.s
+.PHONY : log/logFile.cpp.s
 
 log/logFormatter.o: log/logFormatter.cpp.o
 
@@ -355,6 +436,33 @@ log/main.cpp.s:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/log/main.cpp.s
 .PHONY : log/main.cpp.s
 
+thread/condition.o: thread/condition.cpp.o
+
+.PHONY : thread/condition.o
+
+# target to build an object file
+thread/condition.cpp.o:
+	$(MAKE) -f CMakeFiles/lithe.dir/build.make CMakeFiles/lithe.dir/thread/condition.cpp.o
+.PHONY : thread/condition.cpp.o
+
+thread/condition.i: thread/condition.cpp.i
+
+.PHONY : thread/condition.i
+
+# target to preprocess a source file
+thread/condition.cpp.i:
+	$(MAKE) -f CMakeFiles/lithe.dir/build.make CMakeFiles/lithe.dir/thread/condition.cpp.i
+.PHONY : thread/condition.cpp.i
+
+thread/condition.s: thread/condition.cpp.s
+
+.PHONY : thread/condition.s
+
+# target to generate assembly for a file
+thread/condition.cpp.s:
+	$(MAKE) -f CMakeFiles/lithe.dir/build.make CMakeFiles/lithe.dir/thread/condition.cpp.s
+.PHONY : thread/condition.cpp.s
+
 thread/thread.o: thread/thread.cpp.o
 
 .PHONY : thread/thread.o
@@ -392,6 +500,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... main"
 	@echo "... lithe"
+	@echo "... common/countDownLatch.o"
+	@echo "... common/countDownLatch.i"
+	@echo "... common/countDownLatch.s"
 	@echo "... common/fileUtils.o"
 	@echo "... common/fileUtils.i"
 	@echo "... common/fileUtils.s"
@@ -401,9 +512,15 @@ help:
 	@echo "... common/timestamp.o"
 	@echo "... common/timestamp.i"
 	@echo "... common/timestamp.s"
+	@echo "... log/AsyncLogging.o"
+	@echo "... log/AsyncLogging.i"
+	@echo "... log/AsyncLogging.s"
 	@echo "... log/logAppender.o"
 	@echo "... log/logAppender.i"
 	@echo "... log/logAppender.s"
+	@echo "... log/logFile.o"
+	@echo "... log/logFile.i"
+	@echo "... log/logFile.s"
 	@echo "... log/logFormatter.o"
 	@echo "... log/logFormatter.i"
 	@echo "... log/logFormatter.s"
@@ -416,6 +533,9 @@ help:
 	@echo "... log/main.o"
 	@echo "... log/main.i"
 	@echo "... log/main.s"
+	@echo "... thread/condition.o"
+	@echo "... thread/condition.i"
+	@echo "... thread/condition.s"
 	@echo "... thread/thread.o"
 	@echo "... thread/thread.i"
 	@echo "... thread/thread.s"

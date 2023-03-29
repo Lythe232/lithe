@@ -109,7 +109,7 @@ template<> LoggerManager* Singleton<LoggerManager, void>::singleton_ = 0;
 LoggerManager::LoggerManager()
 {
     root_.reset(new Logger);
-    root_->addAppender(std::shared_ptr<LogAppender>(new FileAppender("/home/lythe/Codes/lithe/log/log", 40960, true, 3, 1024)));
+    root_->addAppender(std::shared_ptr<LogAppender>(new FileAppender("../../log/log", 40960, true, 3, 1024, true)));
     loggers_[root_->getName()] = root_;
 }
 std::shared_ptr<Logger> LoggerManager::getLogger(std::string& name)

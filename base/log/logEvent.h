@@ -9,7 +9,7 @@ namespace lithe
 class LogEvent
 {
 public:
-    LogEvent(std::shared_ptr<Logger> logger, LogLevel::Level level, const char* filename, uint32_t line, uint32_t elapse, uint32_t threadId, uint32_t fiberId, time_t time, std::string threadName)
+    LogEvent(std::shared_ptr<Logger> logger, LogLevel::Level level, const char* filename, uint32_t line, uint32_t elapse, uint32_t threadId, uint32_t fiberId, std::string threadName)
         : filename_(filename), line_(line), elapse_(elapse), threadId_(threadId), fiberId_(fiberId), logger_(logger), level_(level), threadName_(threadName)
     {
     }

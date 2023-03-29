@@ -3,6 +3,17 @@ cmake_minimum_required(VERSION 3.16)
 PROJECT(lithe)
 
 SET(CMAKE_VERBOSE_MAKEFILE ON)
+
+# SET(CXX_FLAGS 
+#     -rdynamic 
+#     -O0
+#     -ggdb
+#     -std=c++11
+#     -Wall 
+#     -Wno-deprecated 
+#     -Wno-unused-function 
+#     )
+
 SET(CMAKE_CXX_FLAGS "$ENV{CXXFLAGS} -rdynamic -O0 -ggdb -std=c++11 -Wall -Wno-deprecated -Wno-unused-function")
 
 include_directories(${CMAKE_SOURCE_DIR})
@@ -12,10 +23,14 @@ SET(LIB_SRC
     log/logAppender.cpp 
     log/logFormatter.cpp 
     log/logStream.cpp
+    log/AsyncLogging.cpp
+    log/logFile.cpp
     thread/thread.cpp
+    thread/condition.cpp
     common/fileUtils.cpp 
     common/processInfo.cpp
     common/timestamp.cpp
+    common/countDownLatch.cpp
     )
 
 add_library(lithe ${LIB_SRC})

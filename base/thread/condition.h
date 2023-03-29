@@ -6,10 +6,11 @@
 namespace lithe
 {
 
-class Condition
+class Condition : public Noncopyable
 {
 public:
-    explicit Condition(Mutex& mutex) : mutex_(mutex) 
+    explicit Condition(Mutex& mutex) : 
+                        mutex_(mutex) 
     {
         pthread_cond_init(&cond_, NULL);
     }

@@ -1,14 +1,23 @@
 #pragma once
 
 #include "common/singleton.h"
+#include "common/processInfo.h"
 #include "thread/mutex.h"
+
 
 #include <string>
 #include <memory>
 #include <list>
 #include <map>
 
-#define LOG_LEVEL(logger, level) LogEventWrap(std::shared_ptr<LogEvent>(new LogEvent(logger, level, __FILE__, __LINE__, 0, 1, 2, 0, "threadName"))).getStream()
+#define LOG_LEVEL(logger, level) LogEventWrap(std::shared_ptr<LogEvent>(new LogEvent(logger,    \
+                                                                                        level, \
+                                                                                        __FILE__, \
+                                                                                        __LINE__, \
+                                                                                        0, \
+                                                                                        ProcessInfo::tid(), \
+                                                                                        0, \
+                                                                                        "threadName"))).getStream()
 #define LOG_DEBUG(logger) LOG_LEVEL(logger, LogLevel::DEBUG)
 #define LOG_INFO(logger) LOG_LEVEL(logger, LogLevel::INFO)
 #define LOG_WARN(logger) LOG_LEVEL(logger, LogLevel::WARN)

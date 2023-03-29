@@ -6,9 +6,17 @@
 
 #IncludeRegexTransform: 
 
+../common/countDownLatch.h
+thread/mutex.h
+../common/thread/mutex.h
+thread/condition.h
+../common/thread/condition.h
+
 ../common/fileUtils.h
 string
 -
+
+../common/noncopyable.h
 
 ../common/processInfo.h
 string
@@ -23,9 +31,49 @@ stdint.h
 -
 time.h
 -
+string
+-
+
+../thread/condition.h
+mutex.h
+../thread/mutex.h
 
 ../thread/mutex.h
+common/noncopyable.h
+../thread/common/noncopyable.h
 pthread.h
+-
+
+../thread/thread.h
+common/noncopyable.h
+../thread/common/noncopyable.h
+pthread.h
+-
+string
+-
+functional
+-
+atomic
+-
+
+/home/lythe/Codes/lithe/base/log/AsyncLogging.h
+logStream.h
+/home/lythe/Codes/lithe/base/log/logStream.h
+logFile.h
+/home/lythe/Codes/lithe/base/log/logFile.h
+thread/mutex.h
+/home/lythe/Codes/lithe/base/log/thread/mutex.h
+thread/thread.h
+/home/lythe/Codes/lithe/base/log/thread/thread.h
+thread/condition.h
+/home/lythe/Codes/lithe/base/log/thread/condition.h
+common/countDownLatch.h
+/home/lythe/Codes/lithe/base/log/common/countDownLatch.h
+vector
+-
+memory
+-
+atomic
 -
 
 /home/lythe/Codes/lithe/base/log/logAppender.h
@@ -35,12 +83,20 @@ logStream.h
 /home/lythe/Codes/lithe/base/log/logStream.h
 logFormatter.h
 /home/lythe/Codes/lithe/base/log/logFormatter.h
+logFile.h
+/home/lythe/Codes/lithe/base/log/logFile.h
 common/fileUtils.h
 /home/lythe/Codes/lithe/base/log/common/fileUtils.h
 common/processInfo.h
 /home/lythe/Codes/lithe/base/log/common/processInfo.h
 thread/mutex.h
 /home/lythe/Codes/lithe/base/log/thread/mutex.h
+thread/thread.h
+/home/lythe/Codes/lithe/base/log/thread/thread.h
+thread/condition.h
+/home/lythe/Codes/lithe/base/log/thread/condition.h
+AsyncLogging.h
+/home/lythe/Codes/lithe/base/log/AsyncLogging.h
 memory
 -
 
@@ -49,6 +105,16 @@ logStream.h
 /home/lythe/Codes/lithe/base/log/logStream.h
 common/timestamp.h
 /home/lythe/Codes/lithe/base/log/common/timestamp.h
+
+/home/lythe/Codes/lithe/base/log/logFile.h
+common/timestamp.h
+/home/lythe/Codes/lithe/base/log/common/timestamp.h
+common/fileUtils.h
+/home/lythe/Codes/lithe/base/log/common/fileUtils.h
+thread/mutex.h
+/home/lythe/Codes/lithe/base/log/thread/mutex.h
+memory
+-
 
 /home/lythe/Codes/lithe/base/log/logFormatter.h
 logStream.h
@@ -71,6 +137,8 @@ string
 /home/lythe/Codes/lithe/base/log/logger.h
 common/singleton.h
 /home/lythe/Codes/lithe/base/log/common/singleton.h
+common/processInfo.h
+/home/lythe/Codes/lithe/base/log/common/processInfo.h
 thread/mutex.h
 /home/lythe/Codes/lithe/base/log/thread/mutex.h
 string
@@ -107,6 +175,8 @@ functional
 -
 
 /home/lythe/Codes/lithe/base/thread/thread.h
+common/noncopyable.h
+/home/lythe/Codes/lithe/base/thread/common/noncopyable.h
 pthread.h
 -
 string

@@ -3,9 +3,13 @@
 #include "logger.h"
 #include "logStream.h"
 #include "logFormatter.h"
+#include "logFile.h"
 #include "common/fileUtils.h"
 #include "common/processInfo.h"
 #include "thread/mutex.h"
+#include "thread/thread.h"
+#include "thread/condition.h"
+#include "AsyncLogging.h"
 
 #include <memory>
 namespace lithe
@@ -30,43 +34,16 @@ class FileAppender : public LogAppender
 {
 public:
     ~FileAppender();
-    FileAppender(std::string basename, off_t rollSize, bool threadSafe, int flushInterval, int checkEveryN);
+    FileAppender(std::string basename, off_t rollSize, bool threadSafe, int flushInterval, int checkEveryN, bool isAsyns);
     void log(std::shared_ptr<Logger> logger, LogLevel::Level level, std::shared_ptr<LogEvent> event) override;
 
-    bool rollFile();
-    void append_unlocked(const char* logline, size_t len);
-    void append(const char* logline, size_t len);
-    void flush();
 private:
-    std::string getLogFileName(const std::string& basename, time_t* now);
-
-    std::unique_ptr<FileUtils::AppendFile> file_;
-    std::string basename_;
-    const off_t rollSize_;
-    const int flushInterval_;
-    const int checkEveryN_;
-
-    Timestamp stamp_;
-
-    int count_;
-
     std::unique_ptr<Mutex> mutex_;
+    std::unique_ptr<AsyncLogging> async_;
+    std::unique_ptr<LogFile> file_;
 
-    time_t startOfPeriod_;
-    time_t lastRoll_;
-    time_t lastFlush_;
-
-
-    const static int kRollPerSeconds_ = 60 * 60 * 24;
 };
-class AsynFileAppender : public LogAppender
-{
-public:
-    AsynFileAppender();
-    ~AsynFileAppender();
 
-private:
-};
 
 class StdoutAppender : public LogAppender
 {

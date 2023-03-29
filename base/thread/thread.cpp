@@ -24,8 +24,9 @@ struct ThreadData
 void* threadFunc(void* args)
 {   
 
-    ThreadData* datas = static_cast<ThreadData*> (args);
+    ThreadData* datas = static_cast<ThreadData*> (args);    
     datas->func_();
+
     delete  datas;
     return nullptr;
 }

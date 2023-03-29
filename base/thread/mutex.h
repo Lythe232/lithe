@@ -1,18 +1,19 @@
 #pragma once
 
+#include "common/noncopyable.h"
+
 #include <pthread.h>
 
 namespace lithe
 {
 
 
-class Mutex
+class Mutex : public Noncopyable
 {
 friend class Condition;
 public:
     Mutex()
     {
-
         pthread_mutex_init(&mutex_, NULL);
     }
     ~Mutex()

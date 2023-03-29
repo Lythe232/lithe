@@ -4,6 +4,7 @@
 #include <assert.h>
 #include <error.h>
 #include <string.h>
+
 namespace FileUtils
 {
 AppendFile::AppendFile(std::string s) : 
@@ -24,6 +25,7 @@ AppendFile::~AppendFile()
 size_t AppendFile::write(const char* logline, size_t len)
 {
     return ::fwrite_unlocked(logline, 1, len, fp_);
+    // return ::fwrite(logline, 1, len, fp_);
 }
 void AppendFile::flush()
 {
@@ -50,6 +52,27 @@ void AppendFile::append(std::string logline)
     }
     writtenBytes_ += written;
 }
-
+void AppendFile::append(const char* logline, int len)
+{
+    size_t written = 0;
+    size_t length = len;
+    while(written != length)
+    {
+        size_t n = length - written;
+        size_t remain = write(logline + written, n);
+        if(remain != n)
+        {
+            int ferr = ferror(fp_);
+            if(ferr)
+            {
+                fprintf(stderr, "AppendFile::append() failed %s\n", strerror(ferr));
+                break;
+            }
+        }
+        written += n;
+    }
+    writtenBytes_ += written;
 }
 
+
+}   //namespace FileUtils

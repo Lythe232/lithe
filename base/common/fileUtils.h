@@ -20,6 +20,7 @@ public:
     void flush();
 
     void append(std::string logline);
+    void append(const char* logline, int len);
     off_t writtenBytes() const { return writtenBytes_; }
 private:
     size_t write(const char* logline, size_t len);
@@ -28,5 +29,6 @@ private:
     FILE* fp_;
     off_t writtenBytes_;
 };
+
 
 }

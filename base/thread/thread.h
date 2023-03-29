@@ -1,5 +1,6 @@
 #pragma once
 
+#include "common/noncopyable.h"
 
 #include <pthread.h>
 #include <string>
@@ -13,7 +14,7 @@ namespace details
 
 };  // namespace details
 
-class Thread
+class Thread : public Noncopyable
 {
 public:
     typedef std::function<void()> ThreadFunc;
