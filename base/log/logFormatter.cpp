@@ -22,12 +22,10 @@ std::stringstream& LogFormatter::format(LogStream& stream, std::shared_ptr<Logge
     //%d{%Y-%m-%d %H:%M:%S}%T%t%T%N%T%F%T[%p]%T[%c]%T%f:%l%T%m%n
 
     struct tm tm;
-    time_t now = event->getTime();
+    time_t now = time(NULL);
     gmtime_r(&now, &tm);
     char timebuf[32];
     strftime(timebuf, sizeof timebuf, "%Y-%m-%d %H:%M:%S", &tm);
-
-    MutexLockGuard lock(*mutex_);
 
     stream << timebuf;
     stream << "\t";

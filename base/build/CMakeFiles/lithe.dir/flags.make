@@ -6,5 +6,5 @@ CXX_FLAGS =  -rdynamic -O0 -ggdb -std=c++11 -Wall -Wno-deprecated -Wno-unused-fu
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/lythe/Codes/lithe/base 
+CXX_INCLUDES = -I/home/mingyang/Codes/lithe/base 
 

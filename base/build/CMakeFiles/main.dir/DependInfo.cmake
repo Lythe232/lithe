@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/lythe/Codes/lithe/base/log/main.cpp" "/home/lythe/Codes/lithe/base/build/CMakeFiles/main.dir/log/main.cpp.o"
+  "/home/mingyang/Codes/lithe/base/log/main.cpp" "/home/mingyang/Codes/lithe/base/build/CMakeFiles/main.dir/log/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -15,7 +15,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/lythe/Codes/lithe/base/build/CMakeFiles/lithe.dir/DependInfo.cmake"
+  "/home/mingyang/Codes/lithe/base/build/CMakeFiles/lithe.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

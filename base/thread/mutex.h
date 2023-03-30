@@ -30,8 +30,6 @@ public:
         pthread_mutex_unlock(&mutex_);
     }
 private:
-    Mutex(Mutex&&) = delete;
-    Mutex(Mutex&)  = delete;
     pthread_mutex_t* getPthreadMutex()
     {
         return &mutex_;
@@ -39,7 +37,7 @@ private:
     pthread_mutex_t mutex_;
 };
 
-class MutexLockGuard
+class MutexLockGuard : public Noncopyable
 {
 public:
     MutexLockGuard(Mutex& mutex) : mutex_(mutex)
@@ -52,8 +50,7 @@ public:
         mutex_.unlock();
     }
 private:
-    MutexLockGuard(MutexLockGuard&) = delete;
-    MutexLockGuard(MutexLockGuard&&) = delete;
+
     Mutex& mutex_;
 
 };

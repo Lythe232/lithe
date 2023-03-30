@@ -1,4 +1,4 @@
-# Install script for directory: /home/lythe/Codes/lithe/base
+# Install script for directory: /home/mingyang/Codes/lithe/base
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/lythe/Codes/lithe/base/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/mingyang/Codes/lithe/base/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

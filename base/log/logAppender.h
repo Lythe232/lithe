@@ -30,26 +30,35 @@ protected:
     LogStream stream_;
     bool hasFormatter_ = false;
 };
+
 class FileAppender : public LogAppender
 {
 public:
     ~FileAppender();
-    FileAppender(std::string basename, off_t rollSize, bool threadSafe, int flushInterval, int checkEveryN, bool isAsyns);
+    FileAppender(std::string basename, off_t rollSize, bool threadSafe, int flushInterval, int checkEveryN);
     void log(std::shared_ptr<Logger> logger, LogLevel::Level level, std::shared_ptr<LogEvent> event) override;
 
 private:
     std::unique_ptr<Mutex> mutex_;
-    std::unique_ptr<AsyncLogging> async_;
     std::unique_ptr<LogFile> file_;
-
 };
+class AsyncAppender : public LogAppender
+{
+public:
+    AsyncAppender(std::string basename, off_t rollSize, int flushInterval, int checkEveryN);
+    ~AsyncAppender();
+    void log(std::shared_ptr<Logger> logger, LogLevel::Level level, std::shared_ptr<LogEvent>) override;
 
+private:
+    std::unique_ptr<AsyncLogging> async_;
+};
 
 class StdoutAppender : public LogAppender
 {
 public:
     StdoutAppender();
     void log(std::shared_ptr<Logger> logger, LogLevel::Level level, std::shared_ptr<LogEvent> event) override;
+    
 private:
     std::unique_ptr<Mutex> mutex_;
 };

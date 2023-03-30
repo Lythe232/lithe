@@ -26,12 +26,12 @@ LogFile::~LogFile()
 }
 bool LogFile::rollFile()
 {
-    time_t now = stamp_.now().seconds();
-    std::string filename = getLogFileName(basename_, &now);
-    //fprintf(stdout, "filename = %s\n", filename.c_str());
-    time_t start = now / kRollPerSeconds_ * kRollPerSeconds_;
+    time_t now = 0;
+    std::string filename = getLogFileName(basename_, &now);     //TODO
     if(now > lastRoll_)
     {
+        time_t start = now / kRollPerSeconds_ * kRollPerSeconds_;
+
         lastRoll_ = now;
         lastFlush_ = now;
         startOfPeriod_ = start;
@@ -114,7 +114,6 @@ std::string LogFile::getLogFileName(const std::string &basename, time_t *now)
     snprintf(pidbuf, sizeof pidbuf, ".%d", ProcessInfo::pid());
 
     filename += pidbuf;
-
     filename += ".log";
 
     return filename;

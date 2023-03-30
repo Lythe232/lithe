@@ -71,6 +71,7 @@ void AsyncLogging::threadFunc_()
     BufferVector buffersToWrite;
     buffersToWrite.reserve(16);
 
+
     latch_.countDown();
     while(running_)
     {
