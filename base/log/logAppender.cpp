@@ -21,12 +21,10 @@ void FileAppender::log(std::shared_ptr<Logger> logger, LogLevel::Level level, st
     if(mutex_)
     {
         MutexLockGuard lock(*mutex_);
-        stream_.resetBuffer();
         formatter_->format(stream_, logger, level, event);
     }
     else
     {
-        stream_.resetBuffer();
         formatter_->format(stream_, logger, level, event);
     }
     file_->append(stream_.buffer().data(), stream_.buffer().length());
@@ -43,24 +41,29 @@ void StdoutAppender::log(std::shared_ptr<Logger> logger, LogLevel::Level level, 
         formatter_->format(stream_, logger, level, event);
     }
     
-    fprintf(stdout, stream_.toString().c_str());
+    fprintf(stdout, "%s", stream_.toString().c_str());
 }
 
 AsyncAppender::AsyncAppender(std::string basename, off_t rollSize, int flushInterval, int checkEveryN) :
-                            async_(new AsyncLogging(basename, rollSize, flushInterval))
+                            async_(new AsyncLogging(basename, rollSize, flushInterval)),
+                            mutex_(new Mutex())
 {
     async_->start();
 }
 AsyncAppender::~AsyncAppender()
 {
-    
+    // printf("allTime = %.4lfs\n", allTime_ / 1000000);
 }
 void AsyncAppender::log(std::shared_ptr<Logger> logger, LogLevel::Level level, std::shared_ptr<LogEvent> event)
 {
-    stream_.resetBuffer();
-    formatter_->format(stream_, logger, level, event);
+    {
+        MutexLockGuard lock(*mutex_);
+        formatter_->format(stream_, logger, level, event);
+    }
     async_->append(stream_.buffer().data(), stream_.buffer().length());
+
 }
+
 
 
 } // lithe

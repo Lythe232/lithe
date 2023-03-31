@@ -21,7 +21,7 @@ public:
         init();
     }
     void init();
-    std::stringstream& format(LogStream&, std::shared_ptr<Logger> logger, LogLevel::Level level, std::shared_ptr<LogEvent> event);
+    void format(LogStream&, std::shared_ptr<Logger> logger, LogLevel::Level level, std::shared_ptr<LogEvent> event);
     ~LogFormatter(){  }
     
     // class FormatItem

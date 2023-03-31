@@ -46,7 +46,8 @@
         "streambuf": "cpp",
         "typeinfo": "cpp",
         "map": "cpp",
-        "list": "cpp"
+        "list": "cpp",
+        "cuchar": "cpp"
     },
     "cmake.sourceDirectory": "${workspaceFolder}/base/log"
 }

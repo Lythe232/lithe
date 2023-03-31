@@ -21,7 +21,7 @@ LoggerManager g_loggerMgr;
 void func1()
 {
     auto logger = g_loggerMgr.getSingletonPtr()->getRoot();
-    for(int i = 0; i < 500000; i++)
+    for(int i = 0; i < 250000; i++)
     {
         LOG_DEBUG(logger) << "--------------------------";
     }
@@ -29,7 +29,7 @@ void func1()
 void func2()
 {
     auto logger = g_loggerMgr.getSingletonPtr()->getRoot();
-    for(int i = 0; i < 500000; i++)
+    for(int i = 0; i < 250000; i++)
     {
         LOG_DEBUG(logger) << "**************************";
     }
@@ -47,10 +47,9 @@ void func4()
     auto logger = g_loggerMgr.getSingletonPtr()->getRoot();
     for(int i = 0; i < 250000; i++)
     {
-        LOG_DEBUG(logger) << "--------------------------";
+        LOG_DEBUG(logger) << "~~~~~~~~~~~~~~~~~~~~~~~~~~";
     }
 }
-
 int main()
 {
 
@@ -61,30 +60,25 @@ int main()
     Thread thread3(std::bind(func3));
     Thread thread4(std::bind(func4));
 
-    struct timespec start;
-    struct timespec end;
-    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &start);
-
-    // thread1.start();
-    // thread2.start();
-    // thread3.start();
-    // thread4.start();
+    Timestamp time_;
+    Timestamp s = time_.now();
+    thread1.start();
+    thread2.start();
+    thread3.start();
+    thread4.start();
 
 
 
-    // thread1.join();
-    // thread2.join();
-    // thread3.join();
-    // thread4.join();
+    thread1.join();
+    thread2.join();
+    thread3.join();
+    thread4.join();
 
+    // for(int i = 0; i < 1000000; i ++)
+    // {
+    //     LOG_ERROR(logger) << "Hello, World" << ": " << 1;
+    // }
+    Timestamp e = time_.now();
+    printf("time: %.4lfs\n", (e.microSeconds() - s.microSeconds()) / 1000000.0);
 
-    for(int i = 0; i < 10; i ++)
-    {
-        LOG_ERROR(logger) << "Hello, World" << ": " << 1;
-    }
-
-    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &end);
-    double start_ms =  start.tv_sec * 1000 + start.tv_nsec / 1000000;
-    double end_ms =  end.tv_sec * 1000 + end.tv_nsec / 1000000;
-    printf("time: %.4lfms\n", end_ms - start_ms);
 }

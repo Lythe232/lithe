@@ -6,6 +6,18 @@
 
 #IncludeRegexTransform: 
 
+../common/blockingQueue.h
+thread/mutex.h
+../common/thread/mutex.h
+thread/condition.h
+../common/thread/condition.h
+common/noncopyable.h
+../common/common/noncopyable.h
+deque
+-
+string
+-
+
 ../common/countDownLatch.h
 thread/mutex.h
 ../common/thread/mutex.h
@@ -69,6 +81,8 @@ thread/condition.h
 /home/mingyang/Codes/lithe/base/log/thread/condition.h
 common/countDownLatch.h
 /home/mingyang/Codes/lithe/base/log/common/countDownLatch.h
+common/blockingQueue.h
+/home/mingyang/Codes/lithe/base/log/common/blockingQueue.h
 vector
 -
 memory

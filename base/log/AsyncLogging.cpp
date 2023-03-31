@@ -19,13 +19,13 @@ AsyncLogging::AsyncLogging(std::string basename, off_t rollSize, int flushInterv
                     cond_(mutex_),
                     currentBuffer_(new Buffer()),
                     nextBuffer_(new Buffer()),
-                    buffers_()
+                    buffers_(),
+                    queue_()
 {
     currentBuffer_->bzero();
     nextBuffer_->bzero();
     buffers_.reserve(16);
 }
-
 
 
 void AsyncLogging::append(const char* logline, int len)
@@ -34,7 +34,6 @@ void AsyncLogging::append(const char* logline, int len)
     if(currentBuffer_->avail() > len)
     {
         currentBuffer_->append(logline, len);
-        // printf("----%s\n", currentBuffer_->toString().c_str());
     }
     else
     {
@@ -47,9 +46,7 @@ void AsyncLogging::append(const char* logline, int len)
         {
             currentBuffer_.reset(new Buffer());
         }
-
         currentBuffer_->append(logline, len);
-
         cond_.notify();
     }
 }
@@ -72,10 +69,12 @@ void AsyncLogging::threadFunc_()
     buffersToWrite.reserve(16);
 
 
-    latch_.countDown();
     while(running_)
     {
-
+        if(latch_.getCount())
+        {
+            latch_.countDown();
+        }
         assert(newBuffer1 && newBuffer1->length() == 0);
         assert(newBuffer2 && newBuffer2->length() == 0);
         assert(buffersToWrite.empty());
@@ -95,6 +94,7 @@ void AsyncLogging::threadFunc_()
                 nextBuffer_ = std::move(newBuffer2);
             }
         }
+
         assert(!buffersToWrite.empty());
 
         if(buffersToWrite.size() > 25)
@@ -120,7 +120,8 @@ void AsyncLogging::threadFunc_()
             assert(!buffersToWrite.empty());
             newBuffer1 = std::move(buffersToWrite.back());
             buffersToWrite.pop_back();
-            newBuffer1->reset();    //bzero
+            newBuffer1->reset();    
+            newBuffer1->bzero();
         }
 
         if (!newBuffer2)
@@ -128,17 +129,17 @@ void AsyncLogging::threadFunc_()
             assert(!buffersToWrite.empty());
             newBuffer2 = std::move(buffersToWrite.back());
             buffersToWrite.pop_back();
-            newBuffer2->reset();    //bzero
+            newBuffer2->reset();    
+            newBuffer2->bzero();
         }
         buffersToWrite.clear();
         file.flush();
-        
     }
-    // MutexLockGuard lock(mutex_);
-    // if(currentBuffer_->length() != 0)
-    // {
-    //     file.append(currentBuffer_->data(), currentBuffer_->length());
-    // }
+    MutexLockGuard lock(mutex_);
+    if(currentBuffer_->length() != 0)
+    {
+        file.append(currentBuffer_->data(), currentBuffer_->length());
+    }
     file.flush();
 
 }

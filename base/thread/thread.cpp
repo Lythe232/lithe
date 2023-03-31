@@ -14,11 +14,11 @@ struct ThreadData
     ThreadData(Thread::ThreadFunc func, std::string name) : func_(func), threadName_(name)
     {
     }
-    std::string threadName_;
-    Thread::ThreadFunc func_;
     ~ThreadData()
     {
     }
+    Thread::ThreadFunc func_;
+    std::string threadName_;
 };
 
 void* threadFunc(void* args)

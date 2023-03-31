@@ -54,7 +54,7 @@ public:
     {
         event_->getLogger()->log(event_->getLevel(), event_);        
     }
-    LogStream& getStream() { event_->getStream(); }
+    LogStream& getStream() { return event_->getStream(); }
 private:
     std::shared_ptr<LogEvent> event_;
 };

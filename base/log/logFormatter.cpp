@@ -8,7 +8,7 @@
 namespace lithe {
 
 
-std::stringstream& LogFormatter::format(LogStream& stream, std::shared_ptr<Logger> logger, LogLevel::Level level, std::shared_ptr<LogEvent> event)
+void LogFormatter::format(LogStream& stream, std::shared_ptr<Logger> logger, LogLevel::Level level, std::shared_ptr<LogEvent> event)
 {
     // if(!items_.empty())
     // {
@@ -20,7 +20,7 @@ std::stringstream& LogFormatter::format(LogStream& stream, std::shared_ptr<Logge
     // }
 
     //%d{%Y-%m-%d %H:%M:%S}%T%t%T%N%T%F%T[%p]%T[%c]%T%f:%l%T%m%n
-
+    stream.resetBuffer();
     struct tm tm;
     time_t now = time(NULL);
     gmtime_r(&now, &tm);
@@ -45,7 +45,6 @@ std::stringstream& LogFormatter::format(LogStream& stream, std::shared_ptr<Logge
     stream << "\t";
     stream << event->getContent();
     stream << "\n";
-
 }
 void LogFormatter::init()
 {
@@ -329,7 +328,7 @@ void LogFormatter::init()
 
 //     }
 //     static std::map<std::string, std::function<std::shared_ptr<FormatItem>(const std::string&)> > FmtMap = {
-// #define XX(str, C) \
+// #define XX(str, C) 
 //             {#str, [](const std::string& s){ return std::shared_ptr<FormatItem>(new C(s)); }}
 //         //m  p  r  c  t  n  d  f  l  T  F  N
 //             XX(m, MessageFormatItem),

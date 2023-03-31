@@ -14,7 +14,7 @@ SET(CMAKE_VERBOSE_MAKEFILE ON)
 #     -Wno-unused-function 
 #     )
 
-SET(CMAKE_CXX_FLAGS "$ENV{CXXFLAGS} -rdynamic -O0 -ggdb -std=c++11 -Wall -Wno-deprecated -Wno-unused-function")
+SET(CMAKE_CXX_FLAGS "$ENV{CXXFLAGS} -rdynamic -O3 -ggdb -std=c++11 -Wall -Wno-deprecated -Wno-unused-function")
 
 include_directories(${CMAKE_SOURCE_DIR})
 

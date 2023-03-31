@@ -51,6 +51,8 @@ public:
 
 private:
     std::unique_ptr<AsyncLogging> async_;
+    std::unique_ptr<Mutex> mutex_;
+
 };
 
 class StdoutAppender : public LogAppender

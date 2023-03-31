@@ -36,7 +36,6 @@ public:
 
     void reset() 
     { 
-        bzero();
         cur_ = data_; 
     }
     

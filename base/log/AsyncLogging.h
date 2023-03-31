@@ -6,6 +6,7 @@
 #include "thread/thread.h"
 #include "thread/condition.h"
 #include "common/countDownLatch.h"
+#include "common/blockingQueue.h"
 
 #include <vector>
 #include <memory>
@@ -26,7 +27,7 @@ public:
     }
 
     void append(const char* logline, int size);
-
+    void append(const std::string logline);
     void start()
     {
         running_ = true;
@@ -63,7 +64,14 @@ private:
     BufferPtr currentBuffer_;
     BufferPtr nextBuffer_;
     BufferVector buffers_;
+
+    BlockingQueue<std::string> queue_;
+
 };
 
+class RingBuffer
+{
+
+};
 
 }

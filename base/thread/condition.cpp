@@ -11,10 +11,10 @@ bool lithe::Condition::waitForSeconds(double seconds)
 
     const int64_t nanoSeconds = static_cast<int64_t>(seconds * nanoSecondsPerSecond);
 
-    abstime.tv_sec = static_cast<time_t>((abstime.tv_nsec + nanoSeconds) / nanoSecondsPerSecond);
-    abstime.tv_nsec = static_cast<long>((nanoSeconds + abstime.tv_sec) % nanoSecondsPerSecond);
+    abstime.tv_sec += static_cast<time_t>((abstime.tv_nsec + nanoSeconds) / nanoSecondsPerSecond);
+    abstime.tv_nsec = static_cast<long> ((abstime.tv_sec  + nanoSeconds) % nanoSecondsPerSecond);
     
-    //TODO 
+
 
     return pthread_cond_timedwait(&cond_, mutex_.getPthreadMutex(), &abstime);
 }

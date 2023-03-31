@@ -17,6 +17,7 @@ CMakeFiles/lithe.dir/common/timestamp.cpp.o
  /home/mingyang/Codes/lithe/base/common/timestamp.cpp
  /home/mingyang/Codes/lithe/base/common/timestamp.h
 CMakeFiles/lithe.dir/log/AsyncLogging.cpp.o
+ ../common/blockingQueue.h
  ../common/countDownLatch.h
  ../common/fileUtils.h
  ../common/noncopyable.h
@@ -29,6 +30,7 @@ CMakeFiles/lithe.dir/log/AsyncLogging.cpp.o
  /home/mingyang/Codes/lithe/base/log/logFile.h
  /home/mingyang/Codes/lithe/base/log/logStream.h
 CMakeFiles/lithe.dir/log/logAppender.cpp.o
+ ../common/blockingQueue.h
  ../common/countDownLatch.h
  ../common/fileUtils.h
  ../common/noncopyable.h
@@ -68,6 +70,7 @@ CMakeFiles/lithe.dir/log/logStream.cpp.o
  /home/mingyang/Codes/lithe/base/log/logStream.cpp
  /home/mingyang/Codes/lithe/base/log/logStream.h
 CMakeFiles/lithe.dir/log/logger.cpp.o
+ ../common/blockingQueue.h
  ../common/countDownLatch.h
  ../common/fileUtils.h
  ../common/noncopyable.h
