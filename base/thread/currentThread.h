@@ -6,8 +6,11 @@
 
 namespace CurrentThread
 {
+extern __thread int cacheTid_;
+extern __thread char tidString[32];
+void cacheTid();
 
-int Tid();
+int tid();
 
 
 }   //namespace CurrentThread

@@ -28,7 +28,7 @@ AsyncLogging::AsyncLogging(std::string basename, off_t rollSize, int flushInterv
 }
 
 
-void AsyncLogging::append(const char* logline, int len)
+void AsyncLogging::append(const char* logline, size_t len)
 {
     MutexLockGuard lock(mutex_);
     if(currentBuffer_->avail() > len)

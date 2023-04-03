@@ -21,7 +21,7 @@ LoggerManager g_loggerMgr;
 void func1()
 {
     auto logger = g_loggerMgr.getSingletonPtr()->getRoot();
-    for(int i = 0; i < 250; i++)
+    for(int i = 0; i < 250000; i++)
     {
         LOG_DEBUG(logger) << "--------------------------";
     }
@@ -29,7 +29,7 @@ void func1()
 void func2()
 {
     auto logger = g_loggerMgr.getSingletonPtr()->getRoot();
-    for(int i = 0; i < 250; i++)
+    for(int i = 0; i < 250000; i++)
     {
         LOG_WARN(logger)  << "//////////////////////////";
     }
@@ -37,7 +37,7 @@ void func2()
 void func3()
 {
     auto logger = g_loggerMgr.getSingletonPtr()->getRoot();
-    for(int i = 0; i < 250; i++)
+    for(int i = 0; i < 250000; i++)
     {
         LOG_ERROR(logger) << "++++++++++++++++++++++++++";
     }
@@ -45,7 +45,7 @@ void func3()
 void func4()
 {
     auto logger = g_loggerMgr.getSingletonPtr()->getRoot();
-    for(int i = 0; i < 250; i++)
+    for(int i = 0; i < 250000; i++)
     {
         LOG_FATAL(logger) << "~~~~~~~~~~~~~~~~~~~~~~~~~~";
     }
@@ -68,8 +68,6 @@ int main()
     thread3.start();
     thread4.start();
 
-
-
     thread1.join();
     thread2.join();
     thread3.join();
@@ -77,7 +75,7 @@ int main()
 
     // for(int i = 0; i < 10; i ++)
     // {
-    //     LOG_DEBUG(logger) << "Hello" << 1 << 2.2 << 3.333333333333 << false;
+    //     LOG_DEBUG(logger) << "Hello" << 1 << " " << 2.2 << " " << 3.3333333 << " " << false;
     // }
     Timestamp e = time_.now();
     printf("time: %.4lfs\n", (e.microSeconds() - s.microSeconds()) / 1000000.0);

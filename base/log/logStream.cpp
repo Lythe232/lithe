@@ -116,12 +116,14 @@ LogStream &LogStream::operator<<(long long val)
 
 LogStream &LogStream::operator<<(const void *)
 {
-    // TODO: insert return statement here
+    //TODO
+    return * this;
 }
 
 LogStream &LogStream::operator<<(const Buffer & buf)
 {
-    
+    //TODO
+    return *this;
 }
 
 } // namespace lithe

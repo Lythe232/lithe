@@ -1,4 +1,5 @@
 #include "thread.h"
+#include "currentThread.h"
 #include "log/logger.h"
 #include "log/logEvent.h"
 
@@ -35,10 +36,10 @@ void* threadFunc(void* args)
 extern LoggerManager g_loggerMgr;
 Thread::Thread(ThreadFunc func, std::string name)
                 :
-                func_(std::move(func)),
                 name_(name),
                 started_(false),
                 joined_(false),
+                func_(std::move(func)),
                 numCreated_(0)
 {
     setDefaultName();
@@ -81,5 +82,7 @@ void Thread::setDefaultName()
     snprintf(buf, sizeof buf, "Thread%d", numCreated_.load());
     name_ = buf;
 }
+
+
 
 }

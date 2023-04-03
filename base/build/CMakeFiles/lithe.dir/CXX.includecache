@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/mingyang/Codes/lithe/base/log/logStream.cpp
+logStream.h
+/home/mingyang/Codes/lithe/base/log/logStream.h
+algorithm
+-
+
+/home/mingyang/Codes/lithe/base/log/logStream.h
+string.h
+-
+string
+-
+

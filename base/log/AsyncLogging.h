@@ -26,7 +26,7 @@ public:
         }
     }
 
-    void append(const char* logline, int size);
+    void append(const char* logline, size_t size);
     void append(const std::string logline);
     void start()
     {

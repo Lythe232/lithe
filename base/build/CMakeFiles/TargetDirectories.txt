@@ -1,0 +1,4 @@
+/home/mingyang/Codes/lithe/base/build/CMakeFiles/rebuild_cache.dir
+/home/mingyang/Codes/lithe/base/build/CMakeFiles/edit_cache.dir
+/home/mingyang/Codes/lithe/base/build/CMakeFiles/test.dir
+/home/mingyang/Codes/lithe/base/build/CMakeFiles/lithe.dir
