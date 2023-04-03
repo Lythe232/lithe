@@ -47,7 +47,13 @@
         "typeinfo": "cpp",
         "map": "cpp",
         "list": "cpp",
-        "cuchar": "cpp"
+        "cuchar": "cpp",
+        "chrono": "cpp",
+        "condition_variable": "cpp",
+        "ctime": "cpp",
+        "ratio": "cpp",
+        "mutex": "cpp",
+        "thread": "cpp"
     },
     "cmake.sourceDirectory": "${workspaceFolder}/base/log"
 }

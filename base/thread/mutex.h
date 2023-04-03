@@ -55,5 +55,31 @@ private:
 
 };
 
+class SpinLock
+{
+public:
+    SpinLock()
+    {
+        pthread_spin_init(&lock_, PTHREAD_PROCESS_PRIVATE);
+    }
+    ~SpinLock()
+    {
+        pthread_spin_destroy(&lock_);
+    }
+    void tryLock()
+    {
+        pthread_spin_trylock(&lock_);
+    }
+    void lock()
+    {
+        pthread_spin_lock(&lock_);
+    }
+    void unlock()
+    {
+        pthread_spin_unlock(&lock_);
+    }
+private:
+    pthread_spinlock_t lock_;
+};
 
 };  // namespace lithe

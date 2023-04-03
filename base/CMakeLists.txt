@@ -35,14 +35,14 @@ SET(LIB_SRC
 
 add_library(lithe ${LIB_SRC})
 
-add_executable(main 
-                log/main.cpp
+add_executable(test 
+                log/test.cpp
 )
 
-add_dependencies(main lithe)
+add_dependencies(test lithe)
 
-target_link_libraries(main lithe)
-target_link_libraries(main pthread)
+target_link_libraries(test lithe)
+target_link_libraries(test pthread)
 
 SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 SET(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
