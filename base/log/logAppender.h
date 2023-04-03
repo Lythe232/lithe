@@ -35,7 +35,7 @@ class FileAppender : public LogAppender
 {
 public:
     ~FileAppender();
-    FileAppender(std::string basename, off_t rollSize, bool threadSafe, int flushInterval, int checkEveryN);
+    FileAppender(std::string basename, off_t rollSize,  int flushInterval, int checkEveryN);
     void log(std::shared_ptr<Logger> logger, LogLevel::Level level, std::shared_ptr<LogEvent> event) override;
 
 private:

@@ -7,9 +7,9 @@ namespace lithe{
 
 
 
-FileAppender::FileAppender(std::string basename, off_t rollSize, bool threadSafe, int flushInterval, int checkEveryN) :
-                            mutex_(threadSafe ? new Mutex() : nullptr),
-                            file_(new LogFile(basename, rollSize, threadSafe, flushInterval, checkEveryN))
+FileAppender::FileAppender(std::string basename, off_t rollSize, int flushInterval, int checkEveryN) :
+                            mutex_(new Mutex()),
+                            file_(new LogFile(basename, rollSize, true, flushInterval, checkEveryN))
 
 {
 }
@@ -18,16 +18,13 @@ FileAppender::~FileAppender()
 }
 void FileAppender::log(std::shared_ptr<Logger> logger, LogLevel::Level level, std::shared_ptr<LogEvent> event)
 {
-    if(mutex_)
     {
         MutexLockGuard lock(*mutex_);
         formatter_->format(stream_, logger, level, event);
     }
-    else
-    {
-        formatter_->format(stream_, logger, level, event);
-    }
-    file_->append(stream_.buffer().data(), stream_.buffer().length());
+    // file_->append(stream_.buffer().data(), stream_.buffer().length());   // fails?
+    file_->append(stream_.toString().c_str(), stream_.toString().size());
+
 }
 
 StdoutAppender::StdoutAppender()
@@ -52,7 +49,6 @@ AsyncAppender::AsyncAppender(std::string basename, off_t rollSize, int flushInte
 }
 AsyncAppender::~AsyncAppender()
 {
-    // printf("allTime = %.4lfs\n", allTime_ / 1000000);
 }
 void AsyncAppender::log(std::shared_ptr<Logger> logger, LogLevel::Level level, std::shared_ptr<LogEvent> event)
 {
