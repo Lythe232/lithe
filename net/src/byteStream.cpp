@@ -202,7 +202,7 @@ size_t ByteStream::read(void *value, ssize_t len)
             r_pos_ += read_size;
             ar += read_size;
             nr -= read_size;
-            (char*)value += read_size;
+            value += read_size;     //FIXME
             nodes.push_back(r_cur_);
             r_cur_ = r_cur_->next;
             cur_size = baseSize_; 
