@@ -384,7 +384,6 @@ bool HttpRequest::recvRequest(const char* data, size_t size)
         }
         {
             parseHeader(data + header_begin, data + header_end, headers_);
-            assert(f);
         }
     }
 
