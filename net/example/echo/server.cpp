@@ -11,12 +11,10 @@
 #include <string.h>
 #include <string>
 using namespace lithe;
+static auto g_logger = LOG_ROOT();
 
 class EchoServer
 {
-
-static auto g_logger = LOG_ROOT();
-
 public:
     EchoServer(std::shared_ptr<IPAddress> addr, int threadNum, std::string name) :
         server_(addr, threadNum),
