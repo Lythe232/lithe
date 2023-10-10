@@ -44,7 +44,7 @@ int CoEpoll::poll(uint64_t timeout, std::vector<CoEpollItem*>* items)
                 LOG_INFO(g_logger) << "Nothing happended.";
                 return rt;
             }
-            if(rt == epevents_.size())
+            if(rt == static_cast<int>(epevents_.size()))
             {
                 epevents_.resize(epevents_.size() * 1.5);
             }
@@ -146,7 +146,7 @@ void CoEpoll::cancelEvent(int fd, int events)
     else
     {
         CoEpollItem* item = it->second;
-        int newEvent = EPOLLET | item->getEvents() & ~events;
+        int newEvent = EPOLLET | (item->getEvents() & ~events);
         int opt = newEvent ? EPOLL_CTL_MOD : EPOLL_CTL_DEL;
         epoll_event event;
         event.events = newEvent;
@@ -197,7 +197,7 @@ int CoEpoll::updateEvent(int opt, int events, int fd)
     memset(&event, 0, sizeof(epoll_event));
     event.data.fd = fd;
     event.events = events;
-    CoEpollItem* item = nullptr;
+    // CoEpollItem* item = nullptr;
 
     MutexLockGuard lock(mutex_);
 
@@ -210,7 +210,7 @@ int CoEpoll::updateEvent(int opt, int events, int fd)
     }
     else
     {
-        item = it->second;
+        // item = it->second;
         rt = epoll_ctl(epfd_, EPOLL_CTL_MOD, fd, &event);
         return 0;
     }
@@ -219,6 +219,7 @@ int CoEpoll::updateEvent(int opt, int events, int fd)
         LOG_ERROR(g_logger) << "CoEpoll::update() epoll_ctl fails. errno[" << errno << "].";
         return -1;
     }
+    return 0;
 }
 
 void CoEpoll::addItem(CoEpollItem* item)

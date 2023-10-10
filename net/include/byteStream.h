@@ -118,8 +118,8 @@ public:
 
 
 private:
-    void write(const void* value, size_t len);
-    size_t read(void* value, size_t len);
+    void write(const void* value, ssize_t len);
+    size_t read(void* value, ssize_t len);
     
     size_t size_;
     size_t w_pos_;  //写下标 只会增加

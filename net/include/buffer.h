@@ -36,8 +36,8 @@ public:
     int16_t readInt16();
     int8_t  readInt8();
 
-    size_t readableSize();
-    size_t writableSize();
+    ssize_t readableSize();
+    ssize_t writableSize();
 
     ssize_t sendto(int fd, int* err);
     ssize_t recvfrom(int fd, int count, int* err);

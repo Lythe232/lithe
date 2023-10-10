@@ -73,10 +73,9 @@ SET(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
 link_libraries(lithe)
 
-# add_executable(server src/main.cpp)
-# add_executable(serverCV example/echo/serverCV.cpp)
-# add_executable(server example/echo/server.cpp)
-add_executable(server src/http/main.cpp)
+add_executable(serverCV example/echo/serverCV.cpp)
+add_executable(server example/echo/server.cpp)
+add_executable(server example/http/main.cpp)
 
 
 # target_link_libraries(server lithe)

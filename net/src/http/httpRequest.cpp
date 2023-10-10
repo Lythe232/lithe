@@ -245,7 +245,7 @@ bool HttpRequest::parseRequestLine(const char* line, HttpRequest& req)
         return false;
     }
 
-    for(int i = 0; i < req.url_.size(); i++)
+    for(size_t i = 0; i < req.url_.size(); i++)
     {
         if(req.url_[i] == '#')
         {
@@ -371,7 +371,7 @@ bool HttpRequest::recvRequest(const char* data, size_t size)
         if (index + 3 < size && p[index+2] == '\r' && p[index+3] == '\n') 
         {
             {
-                bool f = parseHeader(data + header_begin, data + header_end, headers_);
+                parseHeader(data + header_begin, data + header_end, headers_);
             }
             break;
         }
@@ -383,7 +383,7 @@ bool HttpRequest::recvRequest(const char* data, size_t size)
             return false;
         }
         {
-            bool f = parseHeader(data + header_begin, data + header_end, headers_);
+            parseHeader(data + header_begin, data + header_end, headers_);
             assert(f);
         }
     }

@@ -17,18 +17,17 @@ CoTcpConnection::CoTcpConnection(std::shared_ptr<Socket> socket, CoScheduler* sc
     recvBuffer_(new Buffer()),
     sendBuffer_(new Buffer())
 {
-    printf("CoTcpConnection(%d)\n", fd_);
 }
 
 CoTcpConnection::~CoTcpConnection()
 {
-    printf("~CoTcpConnection(%d)\n", fd_);
     poller_->removeItem(fd_);
 }
 
 ssize_t CoTcpConnection::send(const char* data, int len)
 {
-
+    assert(0);
+    return 0;
 }
 
 ssize_t CoTcpConnection::send(std::string& str)
@@ -168,7 +167,7 @@ void CoTcpConnection::process()
         char* buf = new char[rsize];
         recvBuffer_->fetch(buf, rsize);
 
-        printf("(%d)recv data[%d]: %.*s\n", fd_, rsize, rsize, buf);
+        // printf("(%d)recv data[%d]: %.*s\n", fd_, rsize, rsize, buf);
         delete [] buf;
 
         sendBuffer_->append(recvBuffer_);

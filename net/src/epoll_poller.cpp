@@ -45,13 +45,13 @@ int EpollPoller::poll(uint64_t timeout, Poller::ChannelList* result)
             for(int i = 0; i < rt; i++)
             {
                 Channel* channel = static_cast<Channel*>(epevents_[i].data.ptr);
-                auto it = channelMap_.find(channel->fd());
+                // auto it = channelMap_.find(channel->fd());
                 // assert(it != channelMap_.end());
                 channel->setRevents(epevents_[i].events);
                 result->push_back(channel);
             }
 
-            if(rt == epevents_.size())
+            if(rt == static_cast<int>(epevents_.size()))
             {
                 epevents_.resize(epevents_.size() * 2);
             }
@@ -123,7 +123,6 @@ int EpollPoller::updateEvent(Channel* channel, int opt, uint32_t event)
     }
 
     int fd = channel->fd();
-    int oldEvent = channel->getEvents();
     epoll_event ev;
     memset(&ev, 0, sizeof(epoll_event));
     MutexLockGuard lock(mutex_);

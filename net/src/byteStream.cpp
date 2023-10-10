@@ -110,9 +110,9 @@ size_t ByteStream::getCapacity()
     return size_t(capacity_ - w_pos_);
 }
 
-void ByteStream::write(const void *value, size_t len)
+void ByteStream::write(const void *value, ssize_t len)
 {
-    if(len == 0)
+    if(len <= 0)
         return ;
 
     addCapacity(len);
@@ -162,9 +162,9 @@ void ByteStream::write(const void *value, size_t len)
     }
 }
 
-size_t ByteStream::read(void *value, size_t len)
+size_t ByteStream::read(void *value, ssize_t len)
 {
-    if(len == 0)
+    if(len <= 0)
     {
         return 0;
     }
@@ -202,7 +202,7 @@ size_t ByteStream::read(void *value, size_t len)
             r_pos_ += read_size;
             ar += read_size;
             nr -= read_size;
-            value += read_size;
+            (char*)value += read_size;
             nodes.push_back(r_cur_);
             r_cur_ = r_cur_->next;
             cur_size = baseSize_; 

@@ -22,7 +22,7 @@ CoEpollItem::~CoEpollItem()
 
 void CoEpollItem::processEvent()
 {
-    assert(cor_->getState() == Coroutine::READY || Coroutine::RUNNING);
+    assert(cor_->getState() == Coroutine::READY || cor_->getState() == Coroutine::RUNNING);
     if(cor_)
     {
         scheduler_->schedule(cor_);

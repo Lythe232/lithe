@@ -197,7 +197,6 @@ static ssize_t do_io(int fd, OriginFun sysFun, const char* hookFunName, int even
                 lithe::CoScheduler::yieldToHold();
                 if(timer)
                 {
-                    printf("CancelTimer fd = %ld\n", fd);
                     tm->cancelTimer(timer);
                 }
                 if(tinfo->cancelled)
@@ -212,7 +211,6 @@ static ssize_t do_io(int fd, OriginFun sysFun, const char* hookFunName, int even
         {
             // return rt;
         }
-        printf("fd[%d] hookFunName[%s] rt[%d]\n", fd, hookFunName, rt);
         return rt;
     }   //while
 

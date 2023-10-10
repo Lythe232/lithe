@@ -156,8 +156,8 @@ const std::unordered_map<int, std::string> HttpResponse::statusMap_ =
 };
 
 HttpResponse::HttpResponse() : 
-    status_(0),
     version_("HTTP/1.1"),
+    status_(0),
     phrase_(""),
     body_(""),
     bodyLength_(0),
@@ -167,8 +167,8 @@ HttpResponse::HttpResponse() :
 }
 
 HttpResponse::HttpResponse(int status, std::string version) :
-    status_(status),
     version_(version),
+    status_(status),
     phrase_(""),
     body_(""),
     bodyLength_(0),
@@ -284,12 +284,12 @@ HttpResponse& HttpResponse::makeOkResponse(std::string content)
 }
 HttpResponse& HttpResponse::makeErrorResponse(int status, std::string content, std::string contentType)
 {
-
+    //TODO
 }
 
 HttpResponse& HttpResponse::makeGetResponse(std::string content, std::string contentType)
 {
-
+    //TODO
 }
 
 void HttpResponse::clear()
@@ -407,7 +407,7 @@ bool HttpResponse::parseHeader(const char* begin, const char* end, std::unordere
 
 bool HttpResponse::recvResponse(const char* data, size_t size)
 {
-    int index = 0;
+    size_t index = 0;
     int response_line_end = 0;
     if(size < 2)
     {

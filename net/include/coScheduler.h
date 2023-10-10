@@ -86,8 +86,8 @@ private:
     bool isIdle_;
     Mutex mutex_;
     CoEpoll* poller_;
-    EpollItemLists itemLists_;
     std::vector<std::shared_ptr<Coroutine>> cors_;  //TODO use pool
+    EpollItemLists itemLists_;
     static std::atomic<uint64_t> switchCount_;
 };
 

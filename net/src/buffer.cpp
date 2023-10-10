@@ -121,25 +121,25 @@ int8_t Buffer::readInt8()
     return stream_.readFint8();
 }
 
-size_t Buffer::readableSize()
+ssize_t Buffer::readableSize()
 {
     return stream_.readableSize();
 }
 
-size_t Buffer::writableSize()
+ssize_t Buffer::writableSize()
 {
     return stream_.writableSize();
 }
 
 ssize_t Buffer::sendto(int fd, int* err)
 {
-    size_t rs = readableSize();
+    ssize_t rs = readableSize();
     char* data = new char[rs];   ////FIXME
     char* buf = data;
     stream_.read(buf, rs);
 
-    int aw = 0;
-    size_t nw = rs;
+    ssize_t aw = 0;
+    ssize_t nw = rs;
     while(aw < rs)
     {
         int n = ::write(fd, buf, nw);
