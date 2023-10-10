@@ -1,0 +1,12 @@
+/build
+/bin
+/lib
+net/build
+net/bin
+net/lib
+
+/.vscode
+
+*.o
+*.log
+*.a
