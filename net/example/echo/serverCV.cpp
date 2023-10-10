@@ -1,5 +1,5 @@
 #include "include/socket.h"
-#include "include/coTcpServer.cpp"
+#include "include/coTcpServer.h"
 #include "include/address.h"
 #include <signal.h>
 
